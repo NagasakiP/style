@@ -9,13 +9,17 @@ class TestController extends Controller
 {
     public function index()
     {
-        return view('test');
+        $all = Test::all();
+        return view('test', compact('all'));
     }
 
     public function store(TestStoreRequest $request)
     {
         $data = $request->validated();
-        Test::create($data);
-        return view('test');
+        $test = Test::make();
+        $test->name = $data['name'];
+        $test->last_name = $data['last_name'];
+        $test->save();
+        return redirect()->route('test.index');
     }
 }

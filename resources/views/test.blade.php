@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ru">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     </head>
-    <body class="antialiased">
-    <form action="{{ route('test.store') }}" method="POST">
+    <body>
+    <form action="{{ route('test.store') }}" method="post">
+        @csrf
         <label>
             <span>Имя</span>
             <input type="text" name="name">
+            <input type="text" name="last_name">
         </label>
         <button type="submit">Отправить</button>
     </form>
+    <ul>
+        @foreach($all as $test)
+            <ol>{{$test->name}} {{$test->last_name}}</ol>
+        @endforeach
+    </ul>
     </body>
 </html>
