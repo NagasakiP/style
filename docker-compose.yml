@@ -10,7 +10,7 @@ services:
       - "8000:80"
     depends_on:
       - app
-    container_name: nginx_style
+    container_name: nginx_demis
 
   app:
     build:
@@ -18,35 +18,19 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
-    ports:
-        - "5137:5173"
     depends_on:
       - db
-    container_name: app_style
+    container_name: app_demis
 
   db:
-    image: mysql:8.0
-    restart: always
-    volumes:
-      - ./tmp/db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: style
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 8101:3306
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    container_name: db_style
-
-
-  test_db:
-    image: mysql:8.0
-    restart: always
-    volumes:
-      - ./tmp/db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: test_style
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 3305:3306
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    container_name: test_db_style
+   image: mysql:8.0
+   restart: always
+   volumes:
+     - ./tmp/db:/var/lib/mysql
+   environment:
+     MYSQL_DATABASE: demis
+     MYSQL_ROOT_PASSWORD: root
+   ports:
+     - 8101:3306
+   command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+   container_name: db_demis
